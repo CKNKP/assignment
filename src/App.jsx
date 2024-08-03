@@ -18,10 +18,10 @@ import {
   Crosshair,
   CircleChevronRight,
   ConciergeBell,
-  StarIcon,
 } from "lucide-react";
 import "./App.css";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
+import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
 import { Card, Avatar, Badge } from "@mui/material";
 import {
@@ -69,14 +69,30 @@ const customerFeedback = [
   },
 ];
 
+const thinScrollbarStyle = {
+  scrollbarWidth: "thin",
+  scrollbarColor: "#4A5568 #2D3748",
+  "&::-webkit-scrollbar": {
+    width: "6px",
+  },
+  "&::-webkit-scrollbar-track": {
+    background: "#2D3748",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#4A5568",
+    borderRadius: "3px",
+  },
+};
+
 const StarRating = ({ rating }) => {
   return (
     <div className="flex">
       {[...Array(5)].map((_, i) => (
         <StarIcon
           key={i}
-          className={i < rating ? "fill-yellow-400" : "fill-gray-300"}
-          size={18}
+          sx={{
+            color: i < rating ? "gold" : "white",
+          }}
         />
       ))}
     </div>
@@ -532,7 +548,7 @@ const App = ({ children }) => {
             }}
           >
             <h2 className="text-2xl font-semibold mb-4 p-3">Recent Orders</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto p-3">
               <table className="w-full">
                 <thead>
                   <tr className="text-left text-white">
@@ -576,10 +592,10 @@ const App = ({ children }) => {
           <Card
             sx={{ backgroundColor: "#1F2029", color: "#fff", padding: "10px" }}
           >
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-4 p-3">
               Customer&apos;s Feedback
             </h2>
-            <div className="space-y-4 max-h-[300px] overflow-y-auto">
+            <div className="space-y-4 max-h-[300px] overflow-y-auto p-3 ">
               {customerFeedback.map((feedback) => (
                 <div key={feedback.id} className="flex items-start space-x-4">
                   <Avatar>
