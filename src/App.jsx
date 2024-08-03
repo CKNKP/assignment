@@ -120,10 +120,10 @@ const App = ({ children }) => {
               <input
                 type="text"
                 placeholder="Search"
-                className="w-full bg-gray-700 text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full  bg-[#292B2F] text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <Search
-                className="absolute left-3 top-2.5 text-gray-400"
+                className="absolute left-3 top-2.5 text-white"
                 size={20}
               />
             </div>
@@ -176,7 +176,7 @@ const App = ({ children }) => {
                 <h2 className="text-lg font-semibold">Total Orders</h2>
               </div>
               <div className="flex justify-between">
-                <p className="text-3xl font-bold mt-2">$12k</p>
+                <p className="text-3xl font-bold mt-2">75</p>
                 <p className="mr-2 text-red-600 font-bold mt-4">▼ 3%</p>
               </div>
             </Card>
