@@ -71,8 +71,8 @@ const COLORS = ["#7194FF", "#2C3364"];
 
 const App = ({ children }) => {
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white w-full">
-      <aside className="w-16 bg-gray-800 flex flex-col items-center py-4 space-y-8">
+    <div className="flex min-h-screen bg-[#141316] text-white w-full">
+      <aside className="w-16 bg-[#1F2029] flex flex-col items-center py-4 space-y-8">
         <div className="grid grid-cols-2 gap-1">
           <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
           <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
@@ -114,7 +114,7 @@ const App = ({ children }) => {
       </aside>
 
       <div className="flex-1 flex flex-col">
-        <header className="h-16 bg-gray-800 flex items-center justify-between px-4">
+        <header className="h-16 bg-[#1F2029] flex items-center justify-between px-4">
           <div className="flex-1 max-w-xl">
             <div className="relative">
               <input
@@ -161,7 +161,7 @@ const App = ({ children }) => {
           <div className="grid gap-2.5 md:grid-cols-2 lg:grid-cols-6  p-5 grid-cols-1">
             <Card
               sx={{
-                backgroundColor: "#1F2937",
+                backgroundColor: "#1F2029",
                 color: "#fff",
                 padding: "10px",
               }}
@@ -183,7 +183,7 @@ const App = ({ children }) => {
 
             <Card
               sx={{
-                backgroundColor: "#1F2937",
+                backgroundColor: "#1F2029",
                 color: "#fff",
                 padding: "10px",
               }}
@@ -205,7 +205,7 @@ const App = ({ children }) => {
 
             <Card
               sx={{
-                backgroundColor: "#1F2937",
+                backgroundColor: "#1F2029",
                 color: "#fff",
                 padding: "10px",
               }}
@@ -227,7 +227,7 @@ const App = ({ children }) => {
 
             <Card
               sx={{
-                backgroundColor: "#1F2937",
+                backgroundColor: "#1F2029",
                 color: "#fff",
                 padding: "10px",
               }}
@@ -247,7 +247,7 @@ const App = ({ children }) => {
 
             <Card
               sx={{
-                backgroundColor: "#1F2937",
+                backgroundColor: "#1F2029",
                 color: "#fff",
                 padding: "10px",
                 gridColumn: {
@@ -324,10 +324,10 @@ const App = ({ children }) => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-2 p-5">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 p-5">
           <Card
             sx={{
-              backgroundColor: "#1F2937",
+              backgroundColor: "#1F2029",
               color: "#fff",
               padding: "10px",
               gridColumn: {
@@ -363,7 +363,7 @@ const App = ({ children }) => {
                   <Bar
                     dataKey="value"
                     fill="#7194FF"
-                    radius={[10, 10, 10, 10]}
+                    radius={[15, 15, 15, 15]}
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -372,15 +372,18 @@ const App = ({ children }) => {
 
           <Card
             sx={{
-              backgroundColor: "#1F2937",
+              backgroundColor: "#1F2029",
               color: "#fff",
               padding: "25px",
             }}
           >
             <div className="flex flex-col justify-start gap-3">
               <div className="flex justify-between">
-                <div className="items-center w-20 h-20 bg-[#5E323A] rounded-full p-3">
-                  <Crosshair stroke="orange" className="my-4 mx-4" />
+                <div className="flex justify-between">
+                  <div className="items-center w-20 h-20 bg-[#5E323A] rounded-full p-3">
+                    <Crosshair stroke="orange" className="my-4 mx-4" />
+                  </div>
+                  <p className="text-md text-white my-7 mx-4">Goals</p>
                 </div>
                 <div>
                   <CircleChevronRight
@@ -390,11 +393,14 @@ const App = ({ children }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="items-center w-20 h-20 bg-[#293268] rounded-full p-3">
-                  <LunchDiningIcon
-                    className="my-4 mx-4"
-                    sx={{ fill: "#7194FF" }}
-                  />
+                <div className="flex justify-between">
+                  <div className="items-center w-20 h-20 bg-[#293268] rounded-full p-3">
+                    <LunchDiningIcon
+                      className="my-4 mx-4"
+                      sx={{ fill: "#7194FF" }}
+                    />
+                  </div>
+                  <p className="text-md text-white my-7 mx-4">Popular Dishes</p>
                 </div>
                 <div>
                   <CircleChevronRight
@@ -404,8 +410,11 @@ const App = ({ children }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="items-center w-20 h-20 bg-[#214B61] rounded-full p-3">
-                  <ConciergeBell stroke="teal" className="my-4 mx-4" />
+                <div className="flex justify-between">
+                  <div className="items-center w-20 h-20 bg-[#214B61] rounded-full p-3">
+                    <ConciergeBell stroke="teal" className="my-4 mx-4" />
+                  </div>
+                  <p className="text-md text-white my-7 mx-4">Menus</p>
                 </div>
                 <div>
                   <CircleChevronRight
