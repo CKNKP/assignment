@@ -18,11 +18,12 @@ import {
   Crosshair,
   CircleChevronRight,
   ConciergeBell,
+  StarIcon,
 } from "lucide-react";
 import "./App.css";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import Tooltip from "@mui/material/Tooltip";
-import { Card } from "@mui/material";
+import { Card, Avatar, Badge } from "@mui/material";
 import {
   PieChart,
   Pie,
@@ -40,6 +41,47 @@ const data = [
   { name: "Completed", value: 70 },
   { name: "Pending", value: 30 },
 ];
+
+const customerFeedback = [
+  {
+    id: 1,
+    name: "Jenny Wilson",
+    avatar: "/avatar7.jpg",
+    rating: 4,
+    comment:
+      "The food was excellent and so was the service. I had the mushroom risotto with scallops which was awesome. I had a burger over greens (gluten-free) which was also very good. They were very conscientious about gluten allergies.",
+  },
+  {
+    id: 2,
+    name: "Dianne Russell",
+    avatar: "/avatar8.jpg",
+    rating: 5,
+    comment:
+      "We enjoyed the Eggs Benedict served on homemade focaccia bread and hot coffee. Perfect service.",
+  },
+  {
+    id: 3,
+    name: "Devon Lane",
+    avatar: "/avatar9.jpg",
+    rating: 5,
+    comment:
+      "Normally wings are wings, but theirs are lean meaty and tender, and their blue cheese dip is the best I've had.",
+  },
+];
+
+const StarRating = ({ rating }) => {
+  return (
+    <div className="flex">
+      {[...Array(5)].map((_, i) => (
+        <StarIcon
+          key={i}
+          className={i < rating ? "text-yellow-400" : "text-gray-300"}
+          size={16}
+        />
+      ))}
+    </div>
+  );
+};
 
 const activityData = [
   { day: "5", value: 8 },
@@ -65,6 +107,57 @@ const activityData = [
   { day: "25", value: 10 },
   { day: "26", value: 7 },
   { day: "27", value: 6 },
+];
+
+const recentOrders = [
+  {
+    id: 1,
+    customer: "Wade Warren",
+    avatar: "/avatar1.jpg",
+    orderNo: "15478256",
+    amount: "$124.00",
+    status: "Delivered",
+  },
+  {
+    id: 2,
+    customer: "Jane Cooper",
+    avatar: "/avatar2.jpg",
+    orderNo: "48965786",
+    amount: "$365.02",
+    status: "Delivered",
+  },
+  {
+    id: 3,
+    customer: "Guy Hawkins",
+    avatar: "/avatar3.jpg",
+    orderNo: "78958215",
+    amount: "$45.88",
+    status: "Cancelled",
+  },
+  {
+    id: 4,
+    customer: "Kristin Watson",
+    avatar: "/avatar4.jpg",
+    orderNo: "20965732",
+    amount: "$85.00",
+    status: "Pending",
+  },
+  {
+    id: 5,
+    customer: "Cody Fisher",
+    avatar: "/avatar5.jpg",
+    orderNo: "95715620",
+    amount: "$545.00",
+    status: "Delivered",
+  },
+  {
+    id: 6,
+    customer: "Savannah Nguyen",
+    avatar: "/avatar6.jpg",
+    orderNo: "78514568",
+    amount: "$128.20",
+    status: "Delivered",
+  },
 ];
 
 const COLORS = ["#7194FF", "#2C3364"];
@@ -332,12 +425,13 @@ const App = ({ children }) => {
               padding: "10px",
               gridColumn: {
                 lg: "span 2",
+                md: "span 2",
               },
             }}
           >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">Activity</h2>
-              <select className="bg-gray-700 text-white rounded-full px-2 py-1">
+            <div className="flex justify-between items-center mb-4 p-3">
+              <h2 className="text-2xl font-semibold">Activity</h2>
+              <select className="bg-[#4B4C53] text-white rounded-full px-2 py-1">
                 <option>Weekly</option>
                 <option>Monthly</option>
                 <option>Yearly</option>
@@ -347,10 +441,9 @@ const App = ({ children }) => {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={activityData}>
                   <CartesianGrid
-                    strokeDasharray="3 3"
-                    horizontal={true}
                     vertical={false}
                     stroke="#374151"
+                    strokeWidth={1}
                   />
                   <XAxis
                     dataKey="day"
@@ -423,6 +516,60 @@ const App = ({ children }) => {
                   ></CircleChevronRight>
                 </div>
               </div>
+            </div>
+          </Card>
+        </div>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 p-5">
+          <Card
+            sx={{
+              backgroundColor: "#1F2029",
+              color: "#fff",
+              padding: "10px",
+              gridColumn: {
+                lg: "span 2",
+                md: "span 2",
+              },
+            }}
+          >
+            <h2 className="text-2xl font-semibold mb-4 p-3">Recent Orders</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-white">
+                    <th className="pb-2">Customer</th>
+                    <th className="pb-2">Order No.</th>
+                    <th className="pb-2">Amount</th>
+                    <th className="pb-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentOrders.map((order) => (
+                    <tr key={order.id} className="border-t border-gray-700">
+                      <td className="py-2 flex items-center">
+                        <Avatar className="mr-2">
+                          <img src={order.avatar} alt={order.customer} />
+                        </Avatar>
+                        {order.customer}
+                      </td>
+                      <td className="py-2">{order.orderNo}</td>
+                      <td className="py-2">{order.amount}</td>
+                      <td className="py-2">
+                        <Badge
+                          variant={
+                            order.status === "Delivered"
+                              ? "success"
+                              : order.status === "Cancelled"
+                              ? "destructive"
+                              : "default"
+                          }
+                        >
+                          {order.status}
+                        </Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Card>
         </div>
