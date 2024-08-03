@@ -19,7 +19,18 @@ import {
 import "./App.css";
 import Tooltip from "@mui/material/Tooltip";
 import { Card } from "@mui/material";
-import { PieChart, Pie, Cell } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as RechartsTooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   { name: "Completed", value: 70 },
@@ -241,7 +252,7 @@ const App = ({ children }) => {
               }}
             >
               <div className="flex justify-between">
-                <div className="flex justify-start flex-col">
+                <div>
                   <h2 className="text-lg font-semibold">Net Profit</h2>
                   <p className="text-3xl font-bold mt-4">$6759.25</p>
 
@@ -299,13 +310,61 @@ const App = ({ children }) => {
                       Completed
                     </text>
                   </PieChart>
-                  <p className="text-xs text-white mt-1 text-center">
+                  <p className="text-xs text-white text-center">
                     *The values here has been rounded off
                   </p>
                 </div>
               </div>
             </Card>
           </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-2 p-5">
+          <Card
+            sx={{
+              backgroundColor: "#1F2937",
+              color: "#fff",
+              padding: "10px",
+            }}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Activity</h2>
+              <select className="bg-gray-700 text-white rounded px-2 py-1">
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Yearly</option>
+              </select>
+            </div>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={activityData}>
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    horizontal={true}
+                    vertical={false}
+                    stroke="#374151"
+                  />
+                  <XAxis
+                    dataKey="day"
+                    stroke="#fff"
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <YAxis stroke="#fff" axisLine={false} tickLine={false} />
+                  <RechartsTooltip />
+                  <Bar dataKey="value" fill="#7194FF" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+
+          <Card
+            sx={{
+              backgroundColor: "#1F2937",
+              color: "#fff",
+              padding: "10px",
+            }}
+          ></Card>
         </div>
 
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
