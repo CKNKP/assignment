@@ -324,12 +324,15 @@ const App = ({ children }) => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 md:grid-cols-3 gap-2 p-5">
+        <div className="grid lg:grid-cols-3 gap-2 p-5">
           <Card
             sx={{
               backgroundColor: "#1F2937",
               color: "#fff",
               padding: "10px",
+              gridColumn: {
+                lg: "span 2",
+              },
             }}
           >
             <div className="flex justify-between items-center mb-4">
