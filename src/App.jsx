@@ -26,6 +26,32 @@ const data = [
   { name: "Pending", value: 30 },
 ];
 
+const activityData = [
+  { day: "5", value: 8 },
+  { day: "6", value: 5 },
+  { day: "7", value: 9 },
+  { day: "8", value: 3 },
+  { day: "9", value: 5 },
+  { day: "10", value: 4 },
+  { day: "11", value: 3 },
+  { day: "12", value: 4 },
+  { day: "13", value: 4 },
+  { day: "14", value: 3 },
+  { day: "15", value: 7 },
+  { day: "16", value: 5 },
+  { day: "17", value: 6 },
+  { day: "18", value: 8 },
+  { day: "19", value: 10 },
+  { day: "20", value: 12 },
+  { day: "21", value: 14 },
+  { day: "22", value: 11 },
+  { day: "23", value: 5 },
+  { day: "24", value: 4 },
+  { day: "25", value: 10 },
+  { day: "26", value: 7 },
+  { day: "27", value: 6 },
+];
+
 const COLORS = ["#7194FF", "#2C3364"];
 
 const App = ({ children }) => {
@@ -222,54 +248,61 @@ const App = ({ children }) => {
                   <p className="mr-2 text-green-600 font-bold mt-3">▲ 8%</p>
                 </div>
 
-                <PieChart width={100} height={100}>
-                  <Pie
-                    data={data}
-                    cx={50}
-                    cy={50}
-                    innerRadius={30}
-                    outerRadius={40}
-                    dataKey="value"
-                  >
-                    {data.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <text
-                    x={55}
-                    y={45}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#fff"
-                    fontSize={15}
-                    fontWeight={"bold"}
-                  >
-                    70%
-                  </text>
-                  <text
-                    x={55}
-                    y={60}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#fff"
-                    fontSize={8}
-                  >
-                    Goal
-                  </text>
-                  <text
-                    x={55}
-                    y={68}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#fff"
-                    fontSize={8}
-                  >
-                    Completed
-                  </text>
-                </PieChart>
+                <div className="relative">
+                  <PieChart width={100} height={100}>
+                    <Pie
+                      data={data}
+                      cx={50}
+                      cy={50}
+                      innerRadius={30}
+                      outerRadius={40}
+                      dataKey="value"
+                      stroke="none"
+                      cornerRadius={5}
+                    >
+                      {data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <text
+                      x={55}
+                      y={45}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="#fff"
+                      fontSize={15}
+                      fontWeight={"bold"}
+                    >
+                      70%
+                    </text>
+                    <text
+                      x={55}
+                      y={60}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="#fff"
+                      fontSize={8}
+                    >
+                      Goal
+                    </text>
+                    <text
+                      x={55}
+                      y={68}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize={8}
+                      fill="#fff"
+                    >
+                      Completed
+                    </text>
+                  </PieChart>
+                  <p className="text-xs text-white mt-1 text-center">
+                    *The values here has been rounded off
+                  </p>
+                </div>
               </div>
             </Card>
           </div>
