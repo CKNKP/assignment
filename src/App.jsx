@@ -15,8 +15,12 @@ import {
   ShoppingBasket,
   ArrowBigDown,
   CirclePlus,
+  Crosshair,
+  CircleChevronRight,
+  ConciergeBell,
 } from "lucide-react";
 import "./App.css";
+import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import Tooltip from "@mui/material/Tooltip";
 import { Card } from "@mui/material";
 import {
@@ -248,6 +252,7 @@ const App = ({ children }) => {
                 padding: "10px",
                 gridColumn: {
                   lg: "span 2",
+                  md: "span 2",
                 },
               }}
             >
@@ -319,7 +324,7 @@ const App = ({ children }) => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-2 p-5">
+        <div className="grid lg:grid-cols-2 md:grid-cols-3 gap-2 p-5">
           <Card
             sx={{
               backgroundColor: "#1F2937",
@@ -329,7 +334,7 @@ const App = ({ children }) => {
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Activity</h2>
-              <select className="bg-gray-700 text-white rounded px-2 py-1">
+              <select className="bg-gray-700 text-white rounded-full px-2 py-1">
                 <option>Weekly</option>
                 <option>Monthly</option>
                 <option>Yearly</option>
@@ -352,7 +357,11 @@ const App = ({ children }) => {
                   />
                   <YAxis stroke="#fff" axisLine={false} tickLine={false} />
                   <RechartsTooltip />
-                  <Bar dataKey="value" fill="#7194FF" radius={[4, 4, 0, 0]} />
+                  <Bar
+                    dataKey="value"
+                    fill="#7194FF"
+                    radius={[10, 10, 10, 10]}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -362,9 +371,48 @@ const App = ({ children }) => {
             sx={{
               backgroundColor: "#1F2937",
               color: "#fff",
-              padding: "10px",
+              padding: "25px",
             }}
-          ></Card>
+          >
+            <div className="flex flex-col justify-start gap-3">
+              <div className="flex justify-between">
+                <div className="items-center w-20 h-20 bg-[#5E323A] rounded-full p-3">
+                  <Crosshair stroke="orange" className="my-4 mx-4" />
+                </div>
+                <div>
+                  <CircleChevronRight
+                    className="my-7 "
+                    fill="#47484E"
+                  ></CircleChevronRight>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <div className="items-center w-20 h-20 bg-[#293268] rounded-full p-3">
+                  <LunchDiningIcon
+                    className="my-4 mx-4"
+                    sx={{ fill: "#7194FF" }}
+                  />
+                </div>
+                <div>
+                  <CircleChevronRight
+                    className="my-7 "
+                    fill="#47484E"
+                  ></CircleChevronRight>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <div className="items-center w-20 h-20 bg-[#214B61] rounded-full p-3">
+                  <ConciergeBell stroke="teal" className="my-4 mx-4" />
+                </div>
+                <div>
+                  <CircleChevronRight
+                    className="my-7 "
+                    fill="#47484E"
+                  ></CircleChevronRight>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
 
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
