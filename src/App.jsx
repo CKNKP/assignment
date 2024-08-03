@@ -75,8 +75,8 @@ const StarRating = ({ rating }) => {
       {[...Array(5)].map((_, i) => (
         <StarIcon
           key={i}
-          className={i < rating ? "text-yellow-400" : "text-gray-300"}
-          size={16}
+          className={i < rating ? "fill-yellow-400" : "fill-gray-300"}
+          size={18}
         />
       ))}
     </div>
@@ -570,6 +570,30 @@ const App = ({ children }) => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </Card>
+
+          <Card
+            sx={{ backgroundColor: "#1F2029", color: "#fff", padding: "10px" }}
+          >
+            <h2 className="text-2xl font-semibold mb-4">
+              Customer&apos;s Feedback
+            </h2>
+            <div className="space-y-4 max-h-[300px] overflow-y-auto">
+              {customerFeedback.map((feedback) => (
+                <div key={feedback.id} className="flex items-start space-x-4">
+                  <Avatar>
+                    <img src={feedback.avatar} alt={feedback.name} />
+                  </Avatar>
+                  <div>
+                    <h3 className="font-semibold">{feedback.name}</h3>
+                    <StarRating rating={feedback.rating} />
+                    <p className="text-sm text-gray-300 mt-1">
+                      {feedback.comment}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </Card>
         </div>
