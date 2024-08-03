@@ -117,7 +117,7 @@ const App = ({ children }) => {
         </div>
 
         <div>
-          <div className="grid gap-2.5 md:grid-cols-1 lg:grid-cols-6 p-5 ">
+          <div className="grid gap-2.5 md:grid-cols-2 lg:grid-cols-6  p-5 grid-cols-1">
             <Card
               sx={{
                 backgroundColor: "#1F2937",
@@ -209,13 +209,16 @@ const App = ({ children }) => {
                 backgroundColor: "#1F2937",
                 color: "#fff",
                 padding: "10px",
-                gridColumn: "span 2",
+                gridColumn: {
+                  lg: "span 2",
+                },
               }}
             >
               <div className="flex justify-between">
                 <div className="flex justify-start flex-col">
                   <h2 className="text-lg font-semibold">Net Profit</h2>
                   <p className="text-3xl font-bold mt-4">$6759.25</p>
+
                   <p className="mr-2 text-green-600 font-bold mt-3">▲ 8%</p>
                 </div>
 
@@ -235,6 +238,37 @@ const App = ({ children }) => {
                       />
                     ))}
                   </Pie>
+                  <text
+                    x={55}
+                    y={45}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="#fff"
+                    fontSize={15}
+                    fontWeight={"bold"}
+                  >
+                    70%
+                  </text>
+                  <text
+                    x={55}
+                    y={60}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="#fff"
+                    fontSize={8}
+                  >
+                    Goal
+                  </text>
+                  <text
+                    x={55}
+                    y={68}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="#fff"
+                    fontSize={8}
+                  >
+                    Completed
+                  </text>
                 </PieChart>
               </div>
             </Card>
