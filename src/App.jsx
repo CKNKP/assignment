@@ -26,7 +26,7 @@ import StarIcon from "@mui/icons-material/Star";
 import HomeIcon from "@mui/icons-material/Home";
 import Tooltip from "@mui/material/Tooltip";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { Card, Avatar, Badge } from "@mui/material";
+import { Card, Avatar, Badge, Chip } from "@mui/material";
 import {
   PieChart,
   Pie,
@@ -266,17 +266,17 @@ const App = ({ children }) => {
           </div>
           {(!isMobileView || !isSearchFocused) && (
             <div className="flex items-center space-x-4">
-              <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+              <div className="flex items-center justify-center w-8 h-8 bg-[#424448] rounded-full p-1">
                 <Tooltip title="mails" placement="bottom" arrow>
                   <Mail className="text-white cursor-pointer" size={20} />
                 </Tooltip>
               </div>
-              <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+              <div className="flex items-center justify-center w-8 h-8 bg-[#424448] rounded-full p-1">
                 <Tooltip title="settings" placement="bottom" arrow>
                   <Settings className="text-white cursor-pointer" size={20} />
                 </Tooltip>
               </div>
-              <div className="flex items-center relative justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+              <div className="flex items-center relative justify-center w-8 h-8 bg-[#424448] rounded-full p-1">
                 <Tooltip title="notifications" placement="bottom" arrow>
                   <Bell className="text-white cursor-pointer" size={20} />
                 </Tooltip>
@@ -606,17 +606,14 @@ const App = ({ children }) => {
                       <td className="py-2 px-3">{order.orderNo}</td>
                       <td className="py-2 px-3">{order.amount}</td>
                       <td className="py-2 px-3">
-                        <Badge
-                          variant={
-                            order.status === "Delivered"
-                              ? "success"
-                              : order.status === "Cancelled"
-                              ? "destructive"
-                              : "default"
-                          }
-                        >
-                          {order.status}
-                        </Badge>
+                        <Chip
+                          sx={{
+                            backgroundColor: "#194E45",
+                            color: "#00CB8C",
+                          }}
+                          key={order.status}
+                          label={order.status}
+                        ></Chip>
                       </td>
                     </tr>
                   ))}
