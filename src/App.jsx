@@ -26,7 +26,7 @@ import StarIcon from "@mui/icons-material/Star";
 import HomeIcon from "@mui/icons-material/Home";
 import Tooltip from "@mui/material/Tooltip";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { Card, Avatar, Badge, Chip } from "@mui/material";
+import { Card, Avatar, Chip } from "@mui/material";
 import {
   PieChart,
   Pie,
@@ -608,8 +608,22 @@ const App = ({ children }) => {
                       <td className="py-2 px-3">
                         <Chip
                           sx={{
-                            backgroundColor: "#194E45",
-                            color: "#00CB8C",
+                            backgroundColor:
+                              order.status === "Delivered"
+                                ? "#194E45"
+                                : order.status === "Cancelled" ||
+                                  order.status === "Pending"
+                                ? "#5F3339"
+                                : "#1F2029",
+
+                            color:
+                              order.status === "Delivered"
+                                ? "#00CB8C"
+                                : order.status === "Cancelled" ||
+                                  order.status === "Pending"
+                                ? "#F55C5B"
+                                : "#fff",
+                            height: "20px",
                           }}
                           key={order.status}
                           label={order.status}
