@@ -192,14 +192,14 @@ const App = ({ children }) => {
 
   return (
     <div className="flex min-h-screen bg-[#141316] text-white w-full">
-      <aside className="w-16 bg-[#1F2029] flex flex-col items-center py-4 space-y-8">
+      <aside className="w-16 bg-[#1F2029] flex flex-col items-center py-6 space-y-8">
         <div className="grid grid-cols-2 gap-1">
-          <div className="w-3 h-3 bg-[#7194FF] rounded-sm  "></div>
+          <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
           <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
           <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
           <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
         </div>
-        <nav className="flex flex-col space-y-8">
+        <nav className="flex flex-col space-y-8 flex-grow">
           <Tooltip title="Home" placement="right" arrow>
             <span>
               <HomeIcon className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
@@ -225,12 +225,12 @@ const App = ({ children }) => {
               <ShoppingBag className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
-          <Tooltip title="Log Out" placement="right" arrow>
-            <span>
-              <LogOut className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
-            </span>
-          </Tooltip>
         </nav>
+        <Tooltip title="Log Out" placement="right" arrow>
+          <span>
+            <LogOut className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
+          </span>
+        </Tooltip>
       </aside>
 
       <div className="flex-1 flex flex-col">
