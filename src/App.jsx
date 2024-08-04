@@ -36,10 +36,9 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip as RechartsTooltip,
   ResponsiveContainer,
 } from "recharts";
-
+import { Tooltip as RechartsTooltip } from "recharts";
 const data = [
   { name: "Completed", value: 70 },
   { name: "Pending", value: 30 },
@@ -189,6 +188,18 @@ const App = ({ children }) => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-[#2C3364] p-3 rounded-lg shadow-lg border border-[#7194FF]">
+          <p className="text-[#7194FF] font-bold">{`Day ${label}`}</p>
+          <p className="text-white">{`Value: ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="flex min-h-screen bg-[#141316] text-white w-full">
@@ -504,7 +515,7 @@ const App = ({ children }) => {
                     tickLine={false}
                   />
                   <YAxis stroke="#fff" axisLine={false} tickLine={false} />
-                  <RechartsTooltip />
+                  <RechartsTooltip content={<CustomTooltip />} />
                   <Bar
                     dataKey="value"
                     fill="#7194FF"
