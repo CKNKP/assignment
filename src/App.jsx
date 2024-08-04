@@ -246,7 +246,7 @@ const App = ({ children }) => {
               <input
                 type="text"
                 placeholder="Search"
-                className={`w-full bg-[#292B2F] text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                className={`w-full bg-[#292B2F] text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-gray-600`}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
               />
