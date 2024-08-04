@@ -373,9 +373,12 @@ const App = ({ children }) => {
                 padding: "10px",
               }}
             >
-              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 rounded-md p-3">
-                <CircleDollarSign className="text-white" size={34} />
-                <ArrowBigDown className="text-white" size={20} />
+              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-[#5B2A4B] rounded-md p-3">
+                <CircleDollarSign
+                  className="text-white fill-[#E845A3]"
+                  size={34}
+                />
+                <ArrowBigDown className=" fill-[#E845A3]" size={20} />
               </div>
               <div className="flex justify-start flex-col">
                 <h2 className="text-lg font-semibold">Total Revenue</h2>
