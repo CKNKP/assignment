@@ -194,10 +194,10 @@ const App = ({ children }) => {
     <div className="flex min-h-screen bg-[#141316] text-white w-full">
       <aside className="w-16 bg-[#1F2029] flex flex-col items-center py-4 space-y-8">
         <div className="grid grid-cols-2 gap-1">
-          <div className="w-3 h-3 bg-blue-500 rounded-sm  "></div>
-          <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-          <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-          <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+          <div className="w-3 h-3 bg-[#7194FF] rounded-sm  "></div>
+          <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
+          <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
+          <div className="w-3 h-3 bg-[#7194FF] rounded-sm"></div>
         </div>
         <nav className="flex flex-col space-y-8">
           <Tooltip title="Home" placement="right" arrow>
@@ -280,7 +280,7 @@ const App = ({ children }) => {
                 <Tooltip title="notifications" placement="bottom" arrow>
                   <Bell className="text-white cursor-pointer" size={20} />
                 </Tooltip>
-                <div className="absolute top-0 right-3 transform translate-x-1/2 translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="absolute top-0 right-3 transform translate-x-1/2 translate-y-1/2 w-2 h-2 bg-[#7194FF] rounded-full"></div>
               </div>
               <img
                 src="https://secure.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&r=pg&d=identicon"
