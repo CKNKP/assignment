@@ -6,10 +6,8 @@ import {
   LogOut,
   CircleCheck,
   CircleX,
-  Home,
-  BarChart2,
-  FileText,
-  CreditCard,
+  SquareKanban,
+  ClipboardCheck,
   ShoppingBag,
   CircleDollarSign,
   ShoppingBasket,
@@ -18,11 +16,16 @@ import {
   Crosshair,
   CircleChevronRight,
   ConciergeBell,
+  X,
+  Wallet,
 } from "lucide-react";
-import "./App.css";
+
+import { useState, useEffect } from "react";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import StarIcon from "@mui/icons-material/Star";
+import HomeIcon from "@mui/icons-material/Home";
 import Tooltip from "@mui/material/Tooltip";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Card, Avatar, Badge } from "@mui/material";
 import {
   PieChart,
@@ -46,7 +49,8 @@ const customerFeedback = [
   {
     id: 1,
     name: "Jenny Wilson",
-    avatar: "/avatar7.jpg",
+    avatar:
+      "https://thumbs.wbm.im/pw/small/39573f81d4d58261e5e1ed8f1ff890f6.jpg",
     rating: 4,
     comment:
       "The food was excellent and so was the service. I had the mushroom risotto with scallops which was awesome. I had a burger over greens (gluten-free) which was also very good. They were very conscientious about gluten allergies.",
@@ -54,7 +58,8 @@ const customerFeedback = [
   {
     id: 2,
     name: "Dianne Russell",
-    avatar: "/avatar8.jpg",
+    avatar:
+      "https://img.freepik.com/free-photo/portrait-modern-woman_23-2148131698.jpg",
     rating: 5,
     comment:
       "We enjoyed the Eggs Benedict served on homemade focaccia bread and hot coffee. Perfect service.",
@@ -62,27 +67,13 @@ const customerFeedback = [
   {
     id: 3,
     name: "Devon Lane",
-    avatar: "/avatar9.jpg",
+    avatar:
+      "https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg",
     rating: 5,
     comment:
       "Normally wings are wings, but theirs are lean meaty and tender, and their blue cheese dip is the best I've had.",
   },
 ];
-
-const thinScrollbarStyle = {
-  scrollbarWidth: "thin",
-  scrollbarColor: "#4A5568 #2D3748",
-  "&::-webkit-scrollbar": {
-    width: "6px",
-  },
-  "&::-webkit-scrollbar-track": {
-    background: "#2D3748",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    backgroundColor: "#4A5568",
-    borderRadius: "3px",
-  },
-};
 
 const StarRating = ({ rating }) => {
   return (
@@ -129,7 +120,8 @@ const recentOrders = [
   {
     id: 1,
     customer: "Wade Warren",
-    avatar: "/avatar1.jpg",
+    avatar:
+      "https://thumbs.wbm.im/pw/small/39573f81d4d58261e5e1ed8f1ff890f6.jpg",
     orderNo: "15478256",
     amount: "$124.00",
     status: "Delivered",
@@ -137,7 +129,8 @@ const recentOrders = [
   {
     id: 2,
     customer: "Jane Cooper",
-    avatar: "/avatar2.jpg",
+    avatar:
+      "https://ashallendesign.ams3.cdn.digitaloceanspaces.com/rMbsGOyK6i1KjNkbXff8qLohzM1nWQA8HNGwHF0J.png",
     orderNo: "48965786",
     amount: "$365.02",
     status: "Delivered",
@@ -145,7 +138,8 @@ const recentOrders = [
   {
     id: 3,
     customer: "Guy Hawkins",
-    avatar: "/avatar3.jpg",
+    avatar:
+      "https://miro.medium.com/v2/resize:fit:1400/1*vdQaSnhXCjraOIy5G4NjMg.jpeg",
     orderNo: "78958215",
     amount: "$45.88",
     status: "Cancelled",
@@ -153,7 +147,8 @@ const recentOrders = [
   {
     id: 4,
     customer: "Kristin Watson",
-    avatar: "/avatar4.jpg",
+    avatar:
+      "https://sun9-29.userapi.com/impg/Jsf5ygYTv0G-0eA46p36sgPGst2EjzFtJSo0kg/AvkHiapLcL0.jpg?size=854x1280&quality=95&sign=732709e08ca53992fd37a4404b25b79b&type=album",
     orderNo: "20965732",
     amount: "$85.00",
     status: "Pending",
@@ -161,7 +156,8 @@ const recentOrders = [
   {
     id: 5,
     customer: "Cody Fisher",
-    avatar: "/avatar5.jpg",
+    avatar:
+      "https://img.freepik.com/free-photo/woman-s-portrait_144627-39542.jpg",
     orderNo: "95715620",
     amount: "$545.00",
     status: "Delivered",
@@ -169,7 +165,8 @@ const recentOrders = [
   {
     id: 6,
     customer: "Savannah Nguyen",
-    avatar: "/avatar6.jpg",
+    avatar:
+      "https://img.freepik.com/free-photo/close-up-beautiful-joyful-woman_23-2148369593.jpg",
     orderNo: "78514568",
     amount: "$128.20",
     status: "Delivered",
@@ -179,11 +176,25 @@ const recentOrders = [
 const COLORS = ["#7194FF", "#2C3364"];
 
 const App = ({ children }) => {
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 325);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-[#141316] text-white w-full">
       <aside className="w-16 bg-[#1F2029] flex flex-col items-center py-4 space-y-8">
         <div className="grid grid-cols-2 gap-1">
-          <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-sm  "></div>
           <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
           <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
           <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
@@ -191,75 +202,93 @@ const App = ({ children }) => {
         <nav className="flex flex-col space-y-8">
           <Tooltip title="Home" placement="right" arrow>
             <span>
-              <Home className="text-gray-400 hover:text-white cursor-pointer" />
+              <HomeIcon className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
           <Tooltip title="Statistics" placement="right" arrow>
             <span>
-              <BarChart2 className="text-gray-400 hover:text-white cursor-pointer" />
+              <SquareKanban className="text-gray-400 hover:text-[#7194FF] cursor-pointer rotate-180" />
             </span>
           </Tooltip>
           <Tooltip title="Records" placement="right" arrow>
             <span>
-              <FileText className="text-gray-400 hover:text-white cursor-pointer" />
+              <ClipboardCheck className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
           <Tooltip title="Wallet" placement="right" arrow>
             <span>
-              <CreditCard className="text-gray-400 hover:text-white cursor-pointer" />
+              <Wallet className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
           <Tooltip title="Orders" placement="right" arrow>
             <span>
-              <ShoppingBag className="text-gray-400 hover:text-white cursor-pointer" />
+              <ShoppingBag className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
           <Tooltip title="Log Out" placement="right" arrow>
             <span>
-              <LogOut className="text-gray-400 hover:text-white cursor-pointer" />
+              <LogOut className="text-gray-400 hover:text-[#7194FF] cursor-pointer" />
             </span>
           </Tooltip>
         </nav>
       </aside>
 
       <div className="flex-1 flex flex-col">
-        <header className="h-16 bg-[#1F2029] flex items-center justify-between px-4">
-          <div className="flex-1 max-w-xl">
+        <header className="h-16 bg-[#1F2029] flex items-center justify-between px-4 relative">
+          <div
+            className={`flex-1 max-w-xl ${
+              isMobileView && isSearchFocused
+                ? "w-full absolute inset-x-0 px-4"
+                : ""
+            }`}
+          >
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search"
-                className="w-full  bg-[#292B2F] text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full bg-[#292B2F] text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
               />
               <Search
-                className="absolute left-3 top-2.5 text-white"
+                className="absolute left-3 top-2.5 text-white z-20"
                 size={20}
               />
+              {isMobileView && isSearchFocused && (
+                <button
+                  className="absolute right-3 top-2.5 text-white z-20"
+                  onClick={() => setIsSearchFocused(false)}
+                >
+                  <X size={20} />
+                </button>
+              )}
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center  justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
-              <Tooltip title="mails" placement="bottom" arrow>
-                <Mail className="text-white cursor-pointer" size={20} />
-              </Tooltip>
+          {(!isMobileView || !isSearchFocused) && (
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+                <Tooltip title="mails" placement="bottom" arrow>
+                  <Mail className="text-white cursor-pointer" size={20} />
+                </Tooltip>
+              </div>
+              <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+                <Tooltip title="settings" placement="bottom" arrow>
+                  <Settings className="text-white cursor-pointer" size={20} />
+                </Tooltip>
+              </div>
+              <div className="flex items-center relative justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
+                <Tooltip title="notifications" placement="bottom" arrow>
+                  <Bell className="text-white cursor-pointer" size={20} />
+                </Tooltip>
+                <div className="absolute top-0 right-3 transform translate-x-1/2 translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full"></div>
+              </div>
+              <img
+                src="https://secure.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&r=pg&d=identicon"
+                alt="User avatar"
+                className="w-8 h-8 rounded-full"
+              />
             </div>
-            <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
-              <Tooltip title="settings" placement="bottom" arrow>
-                <Settings className="text-white cursor-pointer" size={20} />
-              </Tooltip>
-            </div>
-            <div className="flex items-center relative justify-center w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full p-1">
-              <Tooltip title="notifications" placement="bottom" arrow>
-                <Bell className="text-white cursor-pointer" size={20} />
-              </Tooltip>
-              <div className="absolute top-0 right-3 transform translate-x-1/2 translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full"></div>
-            </div>
-            <img
-              src="https://secure.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&r=pg&d=identicon"
-              alt="User avatar"
-              className="w-8 h-8 rounded-full"
-            />
-          </div>
+          )}
         </header>
 
         <div className="font-bold p-5 text-2xl">
@@ -275,10 +304,10 @@ const App = ({ children }) => {
                 padding: "10px",
               }}
             >
-              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-md p-3">
-                <ShoppingBasket className="text-white" size={24} />
+              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-[#2C3365] rounded-md p-3">
+                <ShoppingBasket className="text-[#4066F0]" size={24} />
                 <div className="absolute bottom-3 right-3 transform translate-x-1/2 translate-y-1/2">
-                  <CirclePlus className="text-white" size={14} />
+                  <CirclePlus className="text-white fill-[#7194FF]" size={14} />
                 </div>
               </div>
               <div className="flex justify-start flex-col">
@@ -286,6 +315,31 @@ const App = ({ children }) => {
               </div>
               <div className="flex justify-between">
                 <p className="text-3xl font-bold mt-2">75</p>
+                <p className="mr-2 text-green-600 font-bold mt-4">▲ 3%</p>
+              </div>
+            </Card>
+
+            <Card
+              sx={{
+                backgroundColor: "#1F2029",
+                color: "#fff",
+                padding: "10px",
+              }}
+            >
+              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-[#145347] rounded-md p-3">
+                <ShoppingBagIcon className="text-[#00CB8C]" size={24} />
+                <div className="absolute bottom-3 right-3 transform translate-x-1/2 translate-y-1/2">
+                  <CircleCheck
+                    className="text-white fill-[#00CB8C]"
+                    size={14}
+                  />
+                </div>
+              </div>
+              <div className="flex justify-start flex-col">
+                <h2 className="text-lg font-semibold">Total Delivered</h2>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-3xl font-bold mt-2">70</p>
                 <p className="mr-2 text-red-600 font-bold mt-4">▼ 3%</p>
               </div>
             </Card>
@@ -297,32 +351,10 @@ const App = ({ children }) => {
                 padding: "10px",
               }}
             >
-              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-gradient-to-r from-green-500 via-green-600 to-green-700 rounded-md p-3">
-                <ShoppingBag className="text-white" size={24} />
+              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-[#5F3339] rounded-md p-3">
+                <ShoppingBagIcon className="text-[#F55C5B]" size={24} />
                 <div className="absolute bottom-3 right-3 transform translate-x-1/2 translate-y-1/2">
-                  <CircleCheck className="text-white" size={14} />
-                </div>
-              </div>
-              <div className="flex justify-start flex-col">
-                <h2 className="text-lg font-semibold">Total Delivered</h2>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-3xl font-bold mt-2">70</p>
-                <p className="mr-2 text-green-600 font-bold mt-4">▲ 5%</p>
-              </div>
-            </Card>
-
-            <Card
-              sx={{
-                backgroundColor: "#1F2029",
-                color: "#fff",
-                padding: "10px",
-              }}
-            >
-              <div className="flex flex-col relative items-center justify-start w-12 h-12 bg-gradient-to-r from-red-500 via-red-600 to-red-700 rounded-md p-3">
-                <ShoppingBag className="text-white" size={24} />
-                <div className="absolute bottom-3 right-3 transform translate-x-1/2 translate-y-1/2">
-                  <CircleX className="text-white" size={14} />
+                  <CircleX className="text-white fill-[#F55C5B]" size={14} />
                 </div>
               </div>
               <div className="flex justify-start flex-col">
@@ -330,7 +362,7 @@ const App = ({ children }) => {
               </div>
               <div className="flex justify-between">
                 <p className="text-3xl font-bold mt-2">05</p>
-                <p className="mr-2 text-red-600 font-bold mt-4">▼ 2%</p>
+                <p className="mr-2 text-green-600  font-bold mt-4"> ▲ 3%</p>
               </div>
             </Card>
 
@@ -350,7 +382,7 @@ const App = ({ children }) => {
               </div>
               <div className="flex justify-between">
                 <p className="text-3xl font-bold mt-2">$12k</p>
-                <p className="mr-2 text-green-600 font-bold mt-4">▲ 8%</p>
+                <p className="mr-2 text-red-600 font-bold mt-4">▼ 3%</p>
               </div>
             </Card>
 
@@ -363,6 +395,7 @@ const App = ({ children }) => {
                   lg: "span 2",
                   md: "span 2",
                 },
+                overflow: "auto",
               }}
             >
               <div className="flex justify-between">
@@ -370,7 +403,7 @@ const App = ({ children }) => {
                   <h2 className="text-lg font-semibold">Net Profit</h2>
                   <p className="text-3xl font-bold mt-4">$6759.25</p>
 
-                  <p className="mr-2 text-green-600 font-bold mt-3">▲ 8%</p>
+                  <p className="mr-2 text-green-600 font-bold mt-3">▲ 3%</p>
                 </div>
 
                 <div className="relative">
@@ -446,7 +479,7 @@ const App = ({ children }) => {
             }}
           >
             <div className="flex justify-between items-center mb-4 p-3">
-              <h2 className="text-2xl font-semibold">Activity</h2>
+              <h2 className="text-2xl font-semibold ">Activity</h2>
               <select className="bg-[#4B4C53] text-white rounded-full px-2 py-1">
                 <option>Weekly</option>
                 <option>Monthly</option>
@@ -552,24 +585,27 @@ const App = ({ children }) => {
               <table className="w-full">
                 <thead>
                   <tr className="text-left text-white">
-                    <th className="pb-2">Customer</th>
-                    <th className="pb-2">Order No.</th>
-                    <th className="pb-2">Amount</th>
-                    <th className="pb-2">Status</th>
+                    <th className="pb-2 px-3">Customer</th>
+                    <th className="pb-2 px-3">Order No.</th>
+                    <th className="pb-2 px-3">Amount</th>
+                    <th className="pb-2 px-3">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recentOrders.map((order) => (
-                    <tr key={order.id} className="border-t border-gray-700">
-                      <td className="py-2 flex items-center">
+                    <tr
+                      key={order.id}
+                      className="border-t border-gray-700 space-x-4"
+                    >
+                      <td className="py-2 flex items-center px-2">
                         <Avatar className="mr-2">
                           <img src={order.avatar} alt={order.customer} />
                         </Avatar>
                         {order.customer}
                       </td>
-                      <td className="py-2">{order.orderNo}</td>
-                      <td className="py-2">{order.amount}</td>
-                      <td className="py-2">
+                      <td className="py-2 px-3">{order.orderNo}</td>
+                      <td className="py-2 px-3">{order.amount}</td>
+                      <td className="py-2 px-3">
                         <Badge
                           variant={
                             order.status === "Delivered"
@@ -598,7 +634,7 @@ const App = ({ children }) => {
             <div className="space-y-4 max-h-[300px] overflow-y-auto p-3 ">
               {customerFeedback.map((feedback) => (
                 <div key={feedback.id} className="flex items-start space-x-4">
-                  <Avatar>
+                  <Avatar className="w-12 h-auto">
                     <img src={feedback.avatar} alt={feedback.name} />
                   </Avatar>
                   <div>
